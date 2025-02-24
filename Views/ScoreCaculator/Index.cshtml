@@ -1,0 +1,20 @@
+@model DemoMvc.Models.ScoreCalculator
+
+<h2>Tính điểm môn học</h2>
+<form method="post" asp-action="Calculate">
+    <label>Điểm A:</label>
+    <input type="number" step="0.1" name="ScoreA" required />
+
+    <label>Điểm B:</label>
+    <input type="number" step="0.1" name="ScoreB" required />
+
+    <label>Điểm C:</label>
+    <input type="number" step="0.1" name="ScoreC" required />
+    <button type="submit">Tính điểm</button>
+</form>
+
+@if (ViewBag.Average != null)
+{
+    <h3>Điểm trung bình: @ViewBag.Average</h3>
+    <p>Xếp loại: @ViewBag.Grade</p>
+}

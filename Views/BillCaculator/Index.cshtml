@@ -1,0 +1,17 @@
+@model DemoMvc.Models.BillCalculator
+
+<h2>Tính tiền hóa đơn</h2>
+<form method="post" asp-action="Calculate">
+    <label>Số lượng:</label>
+    <input type="number" name="Quantity" required />
+
+    <label>Đơn giá:</label>
+    <input type="number" step="0.1" name="UnitPrice" required />
+
+    <button type="submit">Tính tiền</button>
+</form>
+
+@if (ViewBag.Total != null)
+{
+    <h3>Tổng tiền: @ViewBag.Total VNĐ</h3>
+}

@@ -1,0 +1,17 @@
+@model List<DemoMvc.Models.Student>
+
+<h2>Danh sách sinh viên</h2>
+
+<table border="1">
+    <tr>
+        <th>Id</th>
+        <th>Họ và Tên</th>
+    </tr>
+    @foreach (var student in Model) 
+    {
+        <tr>
+            <td>@student.Id</td>
+            <td>@student.FullName</td>
+        </tr>
+    }
+</table>
