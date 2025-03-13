@@ -1,8 +1,13 @@
-namespace DemoMvc.Models
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace DemoMVC.Models
 {
     public class Student
     {
-        public int Id { get; set; }
-        public string FullName { get; set; } = string.Empty;
+        [Key]
+        public required string Id { get; set; }
+        public required string FullName { get; set; }
+        public string? Address { get; set; }
     }
 }

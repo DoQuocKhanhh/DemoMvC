@@ -1,20 +1,38 @@
+using DemoMVC.Data;
+using DemoMVC.Models;
 using Microsoft.AspNetCore.Mvc;
-using DemoMvc.Models; // Đảm bảo đúng namespace
-using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
-namespace DemoMvc.Controllers
+namespace DemoMVC.Controllers
 {
     public class StudentController : Controller
     {
-        public IActionResult Index()
+        private readonly ApplicationDbContext _context;
+        public StudentController(ApplicationDbContext context)
         {
-            List<Student> students = new List<Student>
-            {
-                new Student { Id = 1, FullName = "Nguyễn Văn A" },
-                new Student { Id = 2, FullName = "Trần Thị B" }
-            };
-
-            return View(students); // Truyền danh sách vào View
+            _context = context;
+        }
+        public async Task<IActionResult> Index()
+        {
+            //lay tat ca sinh vien tu trong bang Students
+            var students = await _context.Students.ToListAsync();
+            //tra du lieu ve view
+            return View(students);
+        }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(Student std)
+        {
+            //them doi tuong std vao trong Db Context
+            await _context.Students.AddAsync(std);
+            //luu thay doi vao co so du lieu
+            await _context.SaveChangesAsync();
+            //dieu huong ve trang index khi xu ly thanh cong
+            return RedirectToAction("Index");
         }
     }
 }

@@ -1,17 +1,26 @@
-@model List<DemoMvc.Models.Student>
-
-<h2>Danh sách sinh viên</h2>
-
-<table border="1">
-    <tr>
-        <th>Id</th>
-        <th>Họ và Tên</th>
-    </tr>
-    @foreach (var student in Model) 
-    {
-        <tr>
-            <td>@student.Id</td>
-            <td>@student.FullName</td>
+@model IEnumerable<DemoMVC.Models.Student>
+<a asp-action="Create" class="w3-btn w3-round w3-blue">+ Create new</a>
+<table class="w3-table-all w3-hoverable">
+    <thead>
+        <tr class="w3-blue">
+            <th>Student ID</th>
+            <th>Student Name</th>
+            <th>Student Address</th>
+            <th>Action</th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td>@student.Id</td>
+                <td>@student.FullName</td>
+                <td>@student.Address</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@student.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@student.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
